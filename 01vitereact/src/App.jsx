@@ -1,9 +1,14 @@
+import Chai from "./Chai"
 
 function App() {
  
 
   return (
-    <h1>Hello form React with Vite || Dinesh Sutihar</h1>
+    // This is a fragment
+    <> 
+    <Chai />
+    <h1>Hello form vite basic | Dinesh Sutihar</h1>
+    </>
   )
 }
 

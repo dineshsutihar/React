@@ -29,3 +29,21 @@ npm init @vitejs/app
 cd my-app
 npm run dev
 ```
+
+
+<!-- Component -->
+### Component : Best practice to create a component
+```bash
+import React from 'react';
+
+const Component = () => {
+    return (
+        <div>
+            <h1>Component</h1>
+        </div>
+    )
+}
+
+export default Component;
+```
+
