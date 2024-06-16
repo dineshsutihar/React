@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,7 +12,6 @@ import { Label } from "@/components/ui/label";
 
 import { Link } from "react-router-dom";
 
-
 import { useState } from "react";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 import { app } from "../firebase";
@@ -26,12 +24,15 @@ const SigninPage = () => {
 
   const loginUser = () => {
     signInWithEmailAndPassword(auth, email, password)
-    .then((userData)=>console.log(userData))
-    .catch((error) => {
+      .then((userData) => {
+        console.log(userData);
+        alert("Login SuccessFull");
+      })
+      .catch((error) => {
         // const errorCode = error.code;
         // const errorMessage = error.message;
-        alert(`Error: ${error.code} and ${error.message}`)
-    });
+        alert(`Error: ${error.code} and ${error.message}`);
+      });
   };
 
   return (
@@ -39,9 +40,7 @@ const SigninPage = () => {
       <Card className="w-[400px] ml-auto mr-auto">
         <CardHeader>
           <CardTitle>Login</CardTitle>
-          <CardDescription>
-            Fill the details to login.
-          </CardDescription>
+          <CardDescription>Fill the details to login.</CardDescription>
         </CardHeader>
         <CardContent>
           <form>
@@ -74,16 +73,16 @@ const SigninPage = () => {
         <CardFooter className="flex justify-between">
           <div className="flex flex-col text-xs  space-y-1 ">
             <label htmlFor="login">Don&apos;t have an account?</label>
-            <Link to="/signup"><Button variant="outline">Signup</Button></Link>
+            <Link to="/signup">
+              <Button variant="outline">Signup</Button>
+            </Link>
           </div>
           <div className="flex flex-col text-xs  space-y-1">
             <label htmlFor="login">Click the below button to</label>
-          <Button >Login</Button>
+            <Button onClick={loginUser}>Login</Button>
           </div>
-          
         </CardFooter>
       </Card>
-
     </div>
   );
 };

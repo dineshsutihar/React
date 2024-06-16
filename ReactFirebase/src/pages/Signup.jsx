@@ -27,8 +27,16 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
 
   const createUser = () => {
-    createUserWithEmailAndPassword(auth, email, password);
-    alert("User Sucessfully Registered");
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userData)=>{
+      console.log(userData)
+      alert("Sucessfully Created a Account")
+    })
+    .catch((error) => {
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        alert(`Error: ${error.code} and ${error.message}`)
+    });
   };
 
   return (
