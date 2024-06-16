@@ -1,4 +1,3 @@
-// shadcn  start
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,33 +11,36 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+import { Link } from "react-router-dom";
 
-// shadcn end
 
 import { useState } from "react";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 import { app } from "../firebase";
-import { Link } from "react-router-dom";
 
 const auth = getAuth(app);
 
-const SignupPage = () => {
+const SigninPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const createUser = () => {
-    createUserWithEmailAndPassword(auth, email, password);
-    alert("User Sucessfully Registered");
+  const loginUser = () => {
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userData)=>console.log(userData))
+    .catch((error) => {
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        alert(`Error: ${error.code} and ${error.message}`)
+    });
   };
 
   return (
-    <div className="signup-page dark bg-slate-900 min-h-[85vh] content-center">
+    <div className="signup-page dark bg-slate-900 h-[85vh] content-center">
       <Card className="w-[400px] ml-auto mr-auto">
-
         <CardHeader>
-          <CardTitle>Create New Account</CardTitle>
+          <CardTitle>Login</CardTitle>
           <CardDescription>
-            Create a new account in just simple steps
+            Fill the details to login.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -70,42 +72,20 @@ const SignupPage = () => {
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <div className="flex flex-col text-xs  space-y-1">
-          <label htmlFor="login">Already have an account?</label>
-          <Link to="/signin"><Button variant="outline">Login</Button></Link>
-          </div>
           <div className="flex flex-col text-xs  space-y-1 ">
-            <label htmlFor="signup">Create a new accont.</label>
-            <Button onClick={createUser} id="signup">Signup</Button>
+            <label htmlFor="login">Don&apos;t have an account?</label>
+            <Link to="/signup"><Button variant="outline">Signup</Button></Link>
+          </div>
+          <div className="flex flex-col text-xs  space-y-1">
+            <label htmlFor="login">Click the below button to</label>
+          <Button >Login</Button>
           </div>
           
         </CardFooter>
       </Card>
 
-      {/* Old Data */}
-      {/* <div>
-      <label htmlFor="email">Email</label>
-      <input
-        type="email"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-        id="email"
-        required
-        placeholder="Enter your email here"
-      />
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-        required
-        placeholder="Enter your password here"
-      />
-      <button onClick={createUser}>Signup</button>
-      </div> */}
     </div>
   );
 };
 
-export default SignupPage;
+export default SigninPage;
